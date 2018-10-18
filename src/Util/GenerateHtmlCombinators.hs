@@ -1,4 +1,4 @@
--- taken from https://github.com/jaspervdj/blaze-html/blob/2c4513e30ce768517b8d7b7b154d438f55217006/src/Util/GenerateHtmlCombinators.hs
+-- taken from https://github.com/jaspervdj/blaze-html/blob/f60f9c882561cf55232c745619bdaa76d3f59070/src/Util/GenerateHtmlCombinators.hs
 
 -- Copyright Jasper Van der Jeugt 2010
 
@@ -30,7 +30,7 @@
 -- THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 -- (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 -- OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-  
+
 {-# LANGUAGE CPP #-}
 
 #define DO_NOT_EDIT (doNotEdit __FILE__ __LINE__)
@@ -269,7 +269,7 @@ makeLeaf closing tag = unlines
     , "--"
     , function ++ " :: Html  -- ^ Resulting HTML."
     , function ++ " = Leaf \"" ++ tag ++ "\" \"<" ++ tag ++ "\" " ++ "\""
-               ++ (if closing then " /" else "") ++ ">\""
+               ++ (if closing then " /" else "") ++ ">\" ()"
     , "{-# INLINE " ++ function ++ " #-}"
     ]
   where
@@ -445,7 +445,7 @@ html5 = HtmlVariant
         , "pre", "progress", "q", "rp", "rt", "ruby", "samp", "script"
         , "section", "select", "small", "span", "strong", "style", "sub"
         , "summary", "sup", "table", "tbody", "td", "textarea", "tfoot", "th"
-        , "thead", "time", "title", "tr", "ul", "var", "video"
+        , "thead", "time", "title", "tr", "u", "ul", "var", "video"
         ]
     , leafs =
         -- http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#void-elements
@@ -479,7 +479,7 @@ html5 = HtmlVariant
         , "onsubmit", "onsuspend", "ontimeupdate", "onundo", "onunload"
         , "onvolumechange", "onwaiting", "open", "optimum", "pattern", "ping"
         , "placeholder", "preload", "pubdate", "radiogroup", "readonly", "rel"
-        , "required", "reversed", "rows", "rowspan", "sandbox", "scope"
+        , "required", "reversed", "role", "rows", "rowspan", "sandbox", "scope"
         , "scoped", "seamless", "selected", "shape", "size", "sizes", "span"
         , "spellcheck", "src", "srcdoc", "start", "step", "style", "subject"
         , "summary", "tabindex", "target", "title", "type", "usemap", "value"
