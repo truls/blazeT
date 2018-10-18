@@ -191,6 +191,8 @@ title :: Markup2
 title = wrapMarkup2 Text.Blaze.Html5.title
 tr :: Markup2
 tr = wrapMarkup2 Text.Blaze.Html5.tr
+u :: Markup2
+u = wrapMarkup2 Text.Blaze.Html5.u
 ul :: Markup2
 ul = wrapMarkup2 Text.Blaze.Html5.ul
 var :: Markup2
