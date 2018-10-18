@@ -59,3 +59,6 @@ benchmark-bigtable-non-haskell:
 
 combinators:
 	runghc -isrc Util.GenerateHtmlTCombinators
+
+combinators-stack:
+	stack runghc --package regex-compat -- -isrc Util.GenerateHtmlTCombinators
