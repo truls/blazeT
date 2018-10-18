@@ -104,6 +104,7 @@ import           Control.Monad.Trans.Class
 import           Control.Monad.Writer.Strict
 import qualified Data.ByteString as BS
 import qualified Data.ByteString.Lazy as BL
+import qualified Data.Semigroup as Sem
 import           Data.String
 import qualified Data.Text as T
 import qualified Data.Text.Lazy as LT
@@ -187,13 +188,19 @@ wrapMarkup2 :: (Text.Blaze.Markup -> Text.Blaze.Markup) -> Markup2
 wrapMarkup2 = wrapMarkupT2
 {-# INLINE wrapMarkup2 #-}
 
+instance (Monad m, Sem.Semigroup a) => Sem.Semigroup (MarkupT m a) where
+  a <> b = do {a' <- a; b >>= return . (<> a')}
+  {-# INLINE (<>) #-}
 
 instance (Monad m,Monoid a) => Monoid (MarkupT m a) where
   mempty = return mempty
   {-# INLINE mempty #-}
-  a `mappend` b = do {a' <- a; b >>= return . (mappend a')}
-  {-# INLINE mappend #-}
 
+#if !(MIN_VERSION_base(4,11,0))
+  -- this is redundant starting with base-4.11 / GHC 8.4
+  -- if you want to avoid CPP, you can define `mappend = (<>)` unconditionally
+  mappend = (<>)
+#endif
 
 instance Monad m => Text.Blaze.Attributable (MarkupT m a) where
   h ! a = wrapMarkupT2 (Text.Blaze.! a) h
