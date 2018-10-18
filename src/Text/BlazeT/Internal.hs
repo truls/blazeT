@@ -29,13 +29,12 @@ module Text.BlazeT.Internal
     ,wrapMarkupT2
     ,wrapMarkup
     ,wrapMarkup2
-    ,
-    
+
     -- * Entities exported also by "Text.Blaze.Internal"
     -- $descr1
-    
+
       -- ** Important types.
-      Text.Blaze.ChoiceString (..)
+    , Text.Blaze.ChoiceString (..)
     , Text.Blaze.StaticString (..)
     -- , MarkupM
     -- , Markup
@@ -147,9 +146,9 @@ runMarkupT = runWriterT . fromMarkupT
 -- computation and the blaze markup rendered with a blaze renderer
 -- like 'Text.BlazeT.Renderer.Text.renderHtml'
 runWith :: Monad m => (MarkupI () -> c) -> MarkupT m a -> m (a, c)
-runWith renderer =  liftM (second $ renderer . wrapMarkup) . runMarkupT  
+runWith renderer =  liftM (second $ renderer . wrapMarkup) . runMarkupT
 {-# INLINE runWith #-}
-  
+
 execMarkupT :: Monad m => MarkupT m a -> m Text.Blaze.Markup
 execMarkupT = liftM snd . runMarkupT
 {-# INLINE execMarkupT #-}
@@ -292,7 +291,7 @@ unsafeLazyByteStringComment = wrapMarkup . Text.Blaze.unsafeLazyByteStringCommen
 -- $descr1
 -- The following is an adaptation of all "Text.Blaze.Internal" exports to
 -- @blazeT@ types.
--- 
+--
 -- Entities that are reexported from "Text.Blaze.Internal" have the original
 -- documentation attached to them.
 --
